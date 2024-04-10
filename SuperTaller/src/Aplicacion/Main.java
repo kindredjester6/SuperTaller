@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         MenuTaller vent = new MenuTaller();
         
-        vent.setVisible(true);
+        vent.main(args);
     }
     
 }
