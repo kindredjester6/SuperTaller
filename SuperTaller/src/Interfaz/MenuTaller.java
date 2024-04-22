@@ -178,13 +178,13 @@ public class MenuTaller extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         String[] args = new String[DO_NOTHING_ON_CLOSE];
-        ClientFrame.main(args);
+        ServiceTypeF.main(args);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         String[] args = new String[DO_NOTHING_ON_CLOSE];
-        ServiceTypeF.main(args);
+        ClientFrame.main(args);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
