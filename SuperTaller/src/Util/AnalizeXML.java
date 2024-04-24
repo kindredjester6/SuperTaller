@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -25,6 +26,7 @@ public class AnalizeXML {
 
     public AnalizeXML(String docDir) {
         this.docDir = docDir;
+        attrList = new ArrayList<>(); 
     }
     
     public void prepareXML(String etiqueta) throws ParserConfigurationException, SAXException, IOException{
@@ -35,9 +37,25 @@ public class AnalizeXML {
         this.nodeList = doc.getElementsByTagName(etiqueta);
     }
     
-    public ArrayList<String> convertXMLtoArrList(){
-
-        return new ArrayList<>();
+    public void convertXMLtoArrList(){
+        Node first = nodeList.item(0);
+        first.normalize();
+        System.out.println(nodeList.getLength());
+        System.out.println(first.getChildNodes().item(1).getNodeType() == Node.ELEMENT_NODE);
+        System.out.println();
+        int n = first.getChildNodes().getLength();
+        int m = nodeList.getLength();
+        Node current;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                current = nodeList.item(i).getChildNodes().item(j);
+                if(current.getNodeType() == Node.ELEMENT_NODE) {
+                    System.out.println(
+                     current.getNodeName() + ": " + current.getTextContent());
+                    attrList.add(current.getTextContent());
+                }
+            }
+        }
     }
 
     public ArrayList<String> getAttrList() {

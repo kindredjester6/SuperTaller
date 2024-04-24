@@ -27,27 +27,29 @@ public class Main {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-        String filePath = "../XML/servicios.xml";
+        String filePath = "../XML/mecanicos.xml";
         AnalizeXML node = new AnalizeXML(filePath);
-        node.prepareXML("servicio");
-        
-        Node first = node.getNodeList().item(0);
-        first.normalize();
-        System.out.println(node.getNodeList().getLength());
-        System.out.println(first.getChildNodes().item(1).getNodeType() == Node.ELEMENT_NODE);
-        System.out.println();
-        int n = first.getChildNodes().getLength();
-        int m = node.getNodeList().getLength();
-        Node current;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                current = node.getNodeList().item(i).getChildNodes().item(j);
-                if(current.getNodeType() == Node.ELEMENT_NODE) {
-                    System.out.println(
-                      current.getNodeName() + ": " + current.getTextContent());
-                }
-            }
-        }
+        node.prepareXML("mecanico");
+        node.convertXMLtoArrList();
+        System.out.println("------------------");
+        System.out.println(node.getAttrList());
+//        Node first = node.getNodeList().item(0);
+//        first.normalize();
+//        System.out.println(node.getNodeList().getLength());
+//        System.out.println(first.getChildNodes().item(1).getNodeType() == Node.ELEMENT_NODE);
+//        System.out.println();
+//        int n = first.getChildNodes().getLength();
+//        int m = node.getNodeList().getLength();
+//        Node current;
+//        for (int i = 0; i < m; i++) {
+//            for (int j = 0; j < n; j++) {
+//                current = node.getNodeList().item(i).getChildNodes().item(j);
+//                if(current.getNodeType() == Node.ELEMENT_NODE) {
+//                    System.out.println(
+//                      current.getNodeName() + ": " + current.getTextContent());
+//                }
+//            }
+//        }
         //MenuTaller vent = new MenuTaller();
         
         //vent.main(args);
