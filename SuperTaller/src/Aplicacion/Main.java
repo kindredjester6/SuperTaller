@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 /**
  *
@@ -20,17 +22,35 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
-//        String filePath = "../../../XML's/clientes.xml";
-//        //AnalizeXML node = new AnalizeXML(filePath);
-//        File file = new File(filePath);
-//        System.out.println(file.getPath());
-//        System.out.println(file.exists());
-        //  node.prepareXML();
-        MenuTaller vent = new MenuTaller();
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+        String filePath = "../XML/servicios.xml";
+        AnalizeXML node = new AnalizeXML(filePath);
+        node.prepareXML("servicio");
         
-        vent.main(args);
+        Node first = node.getNodeList().item(0);
+        first.normalize();
+        System.out.println(node.getNodeList().getLength());
+        System.out.println(first.getChildNodes().item(1).getNodeType() == Node.ELEMENT_NODE);
+        System.out.println();
+        int n = first.getChildNodes().getLength();
+        int m = node.getNodeList().getLength();
+        Node current;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                current = node.getNodeList().item(i).getChildNodes().item(j);
+                if(current.getNodeType() == Node.ELEMENT_NODE) {
+                    System.out.println(
+                      current.getNodeName() + ": " + current.getTextContent());
+                }
+            }
+        }
+        //MenuTaller vent = new MenuTaller();
+        
+        //vent.main(args);
     }
     
 }

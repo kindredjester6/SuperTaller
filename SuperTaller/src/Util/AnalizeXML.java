@@ -27,16 +27,16 @@ public class AnalizeXML {
         this.docDir = docDir;
     }
     
-    public void prepareXML() throws ParserConfigurationException, SAXException, IOException{
+    public void prepareXML(String etiqueta) throws ParserConfigurationException, SAXException, IOException{
         System.out.println(docDir);
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = builder.parse(new File(docDir));
         doc.getDocumentElement().normalize();
-        nodeList = doc.getChildNodes();
+        this.nodeList = doc.getElementsByTagName(etiqueta);
     }
     
     public ArrayList<String> convertXMLtoArrList(){
-        
+
         return new ArrayList<>();
     }
 
