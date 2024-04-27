@@ -31,9 +31,6 @@ public class Main {
         AnalizeXML node = new AnalizeXML(filePath);
         node.prepareXML("mecanico");
         node.convertXMLtoArrList();
-        System.out.println(node.getNodeList().item(0).getAttributes().item(0).getNodeValue());
-        System.out.println(node.getNodeList().item(0).getChildNodes().item(3).getChildNodes().item(0).getNodeType());
-        System.out.println("".equals(node.getNodeList().item(0).getChildNodes().item(2).getTextContent().trim()));
 //        System.out.println(node.getAttrList().get(0));
         System.out.println("------------------");
         for (String[] Atrits : node.getAttrList()) {
