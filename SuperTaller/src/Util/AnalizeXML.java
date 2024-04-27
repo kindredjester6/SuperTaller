@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 public class AnalizeXML {
     String docDir;
     NodeList nodeList;
-    ArrayList<String> attrList;
+    ArrayList<String[]> attrList;
 
     public AnalizeXML(String docDir) {
         this.docDir = docDir;
@@ -45,31 +45,40 @@ public class AnalizeXML {
         System.out.println();
         int n = first.getChildNodes().getLength();
         int m = nodeList.getLength();
-        Node current;
+        Node firstNode;
+        Node SecondNode;
+        String[] Atributos;
+        int count;
         for (int i = 0; i < m; i++) {
+            Atributos = new String[n];
+            count = 0;
+            firstNode = nodeList.item(i);
+            Atributos[count] = firstNode.getAttributes().item(0).getNodeValue();
+            count ++;
             for (int j = 0; j < n; j++) {
+                SecondNode = firstNode.getChildNodes().item(j);
                 //"".equals(node.getNodeList().item(0).getChildNodes().item(2).getTextContent().trim()
-                if(!"".equals(nodeList.item(i).getChildNodes().item(j).getTextContent().trim())) 
+                if(!"".equals(SecondNode.getTextContent().trim())) 
                 {
-                    current = nodeList.item(i).getChildNodes().item(j);
-                    System.out.println(current.hasChildNodes() + " " + current.getChildNodes().getLength());
-                    if(current.getChildNodes().getLength() > 1){
-                        for (int k = 0; k < current.getChildNodes().getLength(); k++) {
-                            if(Node.ELEMENT_NODE == current.getChildNodes().item(k).getNodeType()){
-                                
-                                attrList.add(current.getChildNodes().item(k).getTextContent());
+                    //System.out.println(SecondNode.getTextContent().trim() + SecondNode.getChildNodes().getLength());
+                    if(SecondNode.getChildNodes().getLength() > 1){
+                        for (int k = 0; k < SecondNode.getChildNodes().getLength(); k++) {
+                            if(Node.ELEMENT_NODE == SecondNode.getChildNodes().item(k).getNodeType()){
+                                Atributos[count] = SecondNode.getChildNodes().item(k).getTextContent().trim();
+                                count ++;
                             }
                         }
                     }else{
-                     //   System.out.println(current.getNodeName() + ": " + current.getTextContent());
-                        attrList.add(current.getTextContent());
+                        Atributos[count] = SecondNode.getTextContent();
+                                count ++;
                     }
                 }
             }
+            attrList.add(Atributos);
         }
     }
 
-    public ArrayList<String> getAttrList() {
+    public ArrayList<String[]> getAttrList() {
         if(attrList.isEmpty()){
             convertXMLtoArrList();
         }
