@@ -48,11 +48,22 @@ public class AnalizeXML {
         Node current;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                current = nodeList.item(i).getChildNodes().item(j);
-                if(current.getNodeType() == Node.ELEMENT_NODE) {
-                    System.out.println(
-                     current.getNodeName() + ": " + current.getTextContent());
-                    attrList.add(current.getTextContent());
+                //"".equals(node.getNodeList().item(0).getChildNodes().item(2).getTextContent().trim()
+                if(!"".equals(nodeList.item(i).getChildNodes().item(j).getTextContent().trim())) 
+                {
+                    current = nodeList.item(i).getChildNodes().item(j);
+                    System.out.println(current.hasChildNodes() + " " + current.getChildNodes().getLength());
+                    if(current.getChildNodes().getLength() > 1){
+                        for (int k = 0; k < current.getChildNodes().getLength(); k++) {
+                            if(Node.ELEMENT_NODE == current.getChildNodes().item(k).getNodeType()){
+                                
+                                attrList.add(current.getChildNodes().item(k).getTextContent());
+                            }
+                        }
+                    }else{
+                     //   System.out.println(current.getNodeName() + ": " + current.getTextContent());
+                        attrList.add(current.getTextContent());
+                    }
                 }
             }
         }
